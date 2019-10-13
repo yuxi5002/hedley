@@ -1,7 +1,14 @@
 #include "../hedley.h"
 
-#include <stdlib.h>
-#include <time.h>
+#if defined(_MSC_VER)
+  HEDLEY_DIAGNOSTIC_PUSH
+  #pragma warning(disable:4255 4710 4668 4820)
+  #include <time.h>
+  #include <stdlib.h>
+  HEDLEY_DIAGNOSTIC_POP
+#else
+#  include <time.h>
+#endif
 
 HEDLEY_MALLOC
 static void* randalloc(size_t size) {
